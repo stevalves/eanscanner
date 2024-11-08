@@ -1,0 +1,29 @@
+EANScanner
+
+História: Será passado um EAN pela aplicação que, ao realizar a requisição e 
+certificação de que é um EAN, fará com que o mesmo seja enviado a API do google 
+que irá gerar os dados do produto e guardara os campos de nome, imagem, o próprio 
+código de barras e da onde esses dados estão chegando. Após isso ele enviará o 
+nome do produto para a IA que gerar uma descrição uma categoria e vai formatar 
+o nome. Além de gerar esses dados a IA será a principal responsável por formatar 
+o JSON que vai ser usado tanto na renderização do site, quanto na resposta 
+somente JSON.
+
+trigger -> validação -> google -> IA -> retorno
+
+Objetivo
+http://meudominio.com/ 					Landing Page
+http://meudominio.com/produtos/				???
+http://meudominio.com/produtos/{EAN}			Product Page
+http://meudominio.com/produtos/{EAN}?json=true		Only JSON
+
+---- A MAIS
+
+História: Após ter gerado os dados acima, o que resta e ter mais valores para 
+acrescentar valor a aplicação, como uma média de preços por exemplo.
+
+nome
+descrição
+categoria
+imagem
+média de preço

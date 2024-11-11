@@ -1,6 +1,7 @@
 import { SiGooglemaps } from "react-icons/si";
 import { FaPhoneAlt } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import Logo from "./Logo";
 
 const UpHeader = () => {
   return (
@@ -35,12 +36,10 @@ const UpHeader = () => {
 const Header = () => {
   return (
     <>
-      <UpHeader />
-      <header className="flex justify-center items-center relative h-24">
-        <div className="absolute w-full h-[2px] bg-brand4 z-0" />
-        <div className="absolute h-full w-[2px] bg-brand4 z-0"></div>
-        <div className="border-8 border-white px-4 py-2 rounded flex items-center justify-center bg-white relative after:absolute after:content-[''] after:w-full after:h-full after:rounded after:border-brand4 after:border-2 after:z-10">
-          <h1 className="text-brand4 font-bold tracking-wider text-2xl">EANScanner</h1>
+      {/* <UpHeader /> */}
+      <header className="w-full h-32 bg-indigo-200 shadow-md">
+        <div className="container h-full mx-auto flex justify-between items-center">
+          <Logo />
         </div>
       </header>
       <nav className="h-12 w-full bg-brand4"></nav>

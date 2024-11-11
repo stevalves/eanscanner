@@ -15,3 +15,5 @@ const response = axios
   });
 
 console.log(response);
+
+// Lógica para se o produto se encontra, e se caso encontrar, retornar a média de preços do produto.

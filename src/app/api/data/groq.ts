@@ -3,9 +3,32 @@ import Groq from "groq-sdk";
 const client: Groq = new Groq();
 
 // Produto
-const search = ""
+const search = "humildade";
 
-async function main() {
+async function ensureProductIsValid(name: string): Promise<boolean> {
+  const chatCompletion = await client.chat.completions.create({
+    messages: [
+      {
+        role: "system",
+        content: `${name} entra na categoria produto? responsa em json como chave product true ou false`,
+      },
+    ],
+    model: "llama3-groq-70b-8192-tool-use-preview",
+    temperature: 0.5,
+    max_tokens: 1024,
+    top_p: 0.65,
+    stream: false,
+    response_format: {
+      type: "json_object",
+    },
+    stop: null,
+  });
+
+  const res: string | null = chatCompletion.choices[0].message.content;
+  return JSON.parse(res!).product;
+}
+
+async function generateJSON(name: string) {
   const chatCompletion = await client.chat.completions.create({
     messages: [
       {
@@ -31,6 +54,4 @@ async function main() {
   console.log(res);
 }
 
-main();
-
-// Lógica para retornar os dados como json.
+export { ensureProductIsValid, generateJSON };

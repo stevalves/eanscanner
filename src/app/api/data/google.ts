@@ -2,18 +2,13 @@ import axios, { AxiosError } from "axios";
 
 interface GoogleAPIResponse {
   kind: string;
-  url: URL;
+  url: Url;
   queries: Queries;
   context: Context;
   searchInformation: SearchInformation;
   items: Item[];
 }
-
-export interface Context {
-  title: string;
-}
-
-export interface Item {
+interface Item {
   kind: string;
   title: string;
   htmlTitle: string;
@@ -21,27 +16,126 @@ export interface Item {
   displayLink: string;
   snippet: string;
   htmlSnippet: string;
-  mime: string;
-  fileFormat: string;
-  image: Image;
+  formattedUrl: string;
+  htmlFormattedUrl: string;
+  pagemap: Pagemap;
 }
-
-export interface Image {
-  contextLink: string;
-  height: number;
-  width: number;
-  byteSize: number;
-  thumbnailLink: string;
-  thumbnailHeight: number;
-  thumbnailWidth: number;
+interface Pagemap {
+  cse_thumbnail?: Csethumbnail[];
+  metatags: Metatag[];
+  cse_image: Cseimage[];
+  listitem?: Listitem[];
+  offer?: Offer[];
+  product?: Product[];
+  brand?: Brand[];
+  hproduct?: Hproduct[];
 }
-
-export interface Queries {
-  request: NextPage[];
-  nextPage: NextPage[];
+interface Hproduct {
+  fn: string;
+  description: string;
+  photo: string;
+  currency: string;
+  currency_iso4217: string;
 }
-
-export interface NextPage {
+interface Brand {
+  name: string;
+  url: string;
+}
+interface Product {
+  image: string;
+  name?: string;
+  description?: string;
+  sku?: string;
+  url?: string;
+}
+interface Offer {
+  pricecurrency?: string;
+  price?: string;
+  availability?: string;
+  itemcondition?: string;
+  name?: string;
+}
+interface Listitem {
+  item?: string;
+  name: string;
+  position: string;
+}
+interface Cseimage {
+  src: string;
+}
+interface Metatag {
+  "apple-itunes-app"?: string;
+  "og:image"?: string;
+  "og:type"?: string;
+  viewport: string;
+  "csrf-token"?: string;
+  "og:title"?: string;
+  "csrf-param"?: string;
+  "og:url"?: string;
+  "google-play-app"?: string;
+  "og:description"?: string;
+  "og:price:currency"?: string;
+  "product:retailer_item_id"?: string;
+  "kdt:page"?: string;
+  "kdt:product"?: string;
+  "product:item_group_id"?: string;
+  "format-detection"?: string;
+  "og:site_name"?: string;
+  "msapplication-tilecolor"?: string;
+  country?: string;
+  copyright?: string;
+  "theme-color"?: string;
+  author?: string;
+  "vtex-version"?: string;
+  language?: string;
+  currency?: string;
+  abstract?: string;
+  "msapplication-tileimage"?: string;
+  "twitter:card"?: string;
+  "og:image:alt"?: string;
+  "og:image:width"?: string;
+  "og:image:height"?: string;
+  "og:image:type"?: string;
+  "twitter:creator"?: string;
+  "msapplication-square150x150logo"?: string;
+  "next-head-count"?: string;
+  "twitter:site"?: string;
+  "apple-mobile-web-app-capable"?: string;
+  "apple-mobile-web-app-title"?: string;
+  google?: string;
+  title?: string;
+  "twitter:title"?: string;
+  "og:availability"?: string;
+  "twitter:url"?: string;
+  "twitter:image"?: string;
+  "og:brand"?: string;
+  "twitter:description"?: string;
+  "twitter:domain"?: string;
+  "twitter:label1"?: string;
+  "twitter:label2"?: string;
+  "twitter:data1"?: string;
+  "twitter:data2"?: string;
+  "og:locale"?: string;
+}
+interface Csethumbnail {
+  src: string;
+  width: string;
+  height: string;
+}
+interface SearchInformation {
+  searchTime: number;
+  formattedSearchTime: string;
+  totalResults: string;
+  formattedTotalResults: string;
+}
+interface Context {
+  title: string;
+}
+interface Queries {
+  request: Request[];
+  nextPage: Request[];
+}
+interface Request {
   title: string;
   totalResults: string;
   searchTerms: string;
@@ -51,22 +145,12 @@ export interface NextPage {
   outputEncoding: string;
   safe: string;
   cx: string;
-  searchType: string;
 }
-
-export interface SearchInformation {
-  searchTime: number;
-  formattedSearchTime: string;
-  totalResults: string;
-  formattedTotalResults: string;
-}
-
-export interface URL {
+interface Url {
   type: string;
   template: string;
 }
-
-async function GetProductData(search: string) {
+async function GetProductData(search: string): Promise<GoogleAPIResponse | void> {
   // Important Queries
   const google_key = process.env.GOOGLE_USER_KEY;
   const custom_search = process.env.CUSTOM_SEARCH_KEY;

@@ -2,8 +2,31 @@ import Groq from "groq-sdk";
 
 const client: Groq = new Groq();
 
-// Produto
-const search = "humildade";
+async function ensureIsTheSameProduct(
+  p1: string,
+  p2: string
+): Promise<boolean> {
+  const chatCompletion = await client.chat.completions.create({
+    messages: [
+      {
+        role: "system",
+        content: `O produto ${p1} corresponde ao mesmo produto ${p2}? responsa em json como chave product true ou false`,
+      },
+    ],
+    model: "llama-3.1-70b-versatile",
+    temperature: 1,
+    max_tokens: 1024,
+    top_p: 1,
+    stream: false,
+    response_format: {
+      type: "json_object",
+    },
+    stop: null,
+  });
+
+  const res = chatCompletion.choices[0].message.content;
+  return JSON.parse(res!).product;
+}
 
 async function ensureProductIsValid(name: string): Promise<boolean> {
   const chatCompletion = await client.chat.completions.create({
@@ -13,10 +36,10 @@ async function ensureProductIsValid(name: string): Promise<boolean> {
         content: `${name} entra na categoria produto? responsa em json como chave product true ou false`,
       },
     ],
-    model: "llama3-groq-70b-8192-tool-use-preview",
-    temperature: 0.5,
+    model: "llama-3.1-70b-versatile",
+    temperature: 1,
     max_tokens: 1024,
-    top_p: 0.65,
+    top_p: 1,
     stream: false,
     response_format: {
       type: "json_object",
@@ -28,18 +51,17 @@ async function ensureProductIsValid(name: string): Promise<boolean> {
   return JSON.parse(res!).product;
 }
 
-async function generateJSON(name: string) {
+async function generateJSON(
+  name: string
+): Promise<{ name: string; description: string; category: string }> {
   const chatCompletion = await client.chat.completions.create({
     messages: [
       {
         role: "system",
-        content:
-          "Gere para mim um json com os dados do produto " +
-          search +
-          ", contendo nome, descrição e categoria. Esses dados devem ser gerados por você em português brasileiro, a categoria deve ter somente uma palavra.",
+        content: `Gere para mim um json com os dados do produto ${name}, contendo name, description e category. Esses dados devem ser gerados por você em português brasileiro, a categoria deve ter somente uma palavra.`,
       },
     ],
-    model: "llama3-groq-70b-8192-tool-use-preview",
+    model: "llama-3.1-70b-versatile",
     temperature: 0.5,
     max_tokens: 1024,
     top_p: 0.65,
@@ -51,7 +73,7 @@ async function generateJSON(name: string) {
   });
 
   const res = chatCompletion.choices[0].message.content;
-  console.log(res);
+  return JSON.parse(res!);
 }
 
-export { ensureProductIsValid, generateJSON };
+export { ensureProductIsValid, generateJSON, ensureIsTheSameProduct };

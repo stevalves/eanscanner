@@ -150,25 +150,26 @@ interface Url {
   type: string;
   template: string;
 }
-async function GetProductData(search: string): Promise<GoogleAPIResponse | void> {
+async function GetProductData(
+  search: string
+): Promise<GoogleAPIResponse | void | any> {
   // Important Queries
   const google_key = process.env.GOOGLE_USER_KEY;
   const custom_search = process.env.CUSTOM_SEARCH_KEY;
   // const search_type = "&searchType=image";
-  const responses = "3";
+  const responses = "10";
 
   const url = `https://www.googleapis.com/customsearch/v1?key=${google_key}&cx=${custom_search}&num=${responses}&q=produto+${search}`;
 
-  axios
+  const response = await axios
     .get<GoogleAPIResponse>(url)
-    .then((response) => {
-      return response;
-    })
+    .then((response) => response)
     .catch((e: AxiosError) => {
       console.error(e.message);
     });
+
+    return response
 }
 
-export { GetProductData }; 
+export { GetProductData };
 export type { GoogleAPIResponse };
-

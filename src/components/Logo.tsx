@@ -1,10 +1,5 @@
-import Image from "next/image";
-import logo from "../img/shopping-bag.svg";
-
 export default function Logo() {
   return (
-    <div className="w-20 h-20">
-      <Image src={logo} alt="logo eanscanner" />
-    </div>
+    <div className="w-14 h-14 border-2 rotate-45 border-x-brand2 border-y-brand3" />
   );
 }

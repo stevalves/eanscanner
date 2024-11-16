@@ -3,7 +3,8 @@
 import { AxiosResponse } from "axios";
 import { GetProductData, GoogleAPIResponse } from "./google";
 import { ensureProductIsValid, generateJSON } from "./groq";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import { getAttributesAndAvPrice } from "./mlbb";
 
 async function getJSON(ean: string): Promise<Object> {
   let { data: productData } = (await GetProductData(
@@ -14,9 +15,9 @@ async function getJSON(ean: string): Promise<Object> {
   if (!productData || !productData.items)
     return { response: "error", message: "product not found!" };
 
-  const productImageList = productData.items.map(
-    (i) => i.pagemap.metatags[0]["og:image"]
-  ).filter((i) => i);
+  const productImageList = productData.items
+    .map((i) => i.pagemap.metatags[0]["og:image"])
+    .filter((i) => i);
 
   const productName = productData.items.find(
     (v) => v.pagemap.metatags[0]["og:title"]
@@ -30,15 +31,21 @@ async function getJSON(ean: string): Promise<Object> {
 
   const response = {
     ...getProductCategoryAndDescription,
+    ...(await getAttributesAndAvPrice(productName!)),
     images: productImageList,
   };
 
   return response;
 }
 
-export async function GET() {
+export async function GET(
+  _: NextRequest,
+  context: { params: { ean_product: string } }
+) {
+  const { ean_product } = context.params;
+
   try {
-    return NextResponse.json(await getJSON("17896003739333"));
+    return NextResponse.json(await getJSON(ean_product));
   } catch (error) {
     console.error("Error:", error);
     return NextResponse.json(

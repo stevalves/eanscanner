@@ -1,7 +1,6 @@
 import axios, { AxiosError, AxiosResponse } from "axios";
-import { useEffect, useState } from "react";
 
-export interface Root {
+export interface MlbbResponse {
   site_id: string;
   country_default_time_zone: string;
   query: string;
@@ -191,50 +190,44 @@ export interface ProductInfo {
   status: string;
 }
 
-function App() {
-  const search = "coca cola 2l"; // Nome do produto para pesquisa (formatado - [encodeURIComponent()])
-  const limit = "&limit=5"; // Limite de requisições
+export async function getAttributesAndAvPrice(search: string) {
+  const limit = "&limit=3"; // Limite de requisições
   const format = "&sale_format=1359391"; // Formato de venda 1359391, id dos produtos unitários
 
-  const query = `https://api.mercadolibre.com/sites/MLB/search?q=${encodeURIComponent(search)}${limit}${format}`;
-  const [res, setRes] = useState<AxiosResponse<Root>>();
+  const query = `https://api.mercadolibre.com/sites/MLB/search?q=${encodeURIComponent(
+    search
+  )}${limit}${format}`;
 
-  useEffect(() => {
-    axios
-      .get<Root>(query)
-      .then((res) => setRes(res))
-      .catch((e: AxiosError) => console.error(e.message));
-  }, []);
+  const response = await axios
+    .get<MlbbResponse>(query)
+    .then((res) => res)
+    .catch((e: AxiosError) => console.error(e.message));
 
-  console.log(res);
+  if (!response!.data.results || response!.status != 200) return;
 
-  return (
-    <div>
-      <h1>{res?.data.results[0].title}</h1>
-      <h1>R${Number(res?.data.results[0].price).toFixed(2)}</h1>
-      <h1>{limit} resultados:</h1>
-      <ul>
-        {res?.data.results.map((item, index) => (
-          <li key={index}>{item.title}</li>
-        ))}
-      </ul>
-      <h1>média de preço = </h1>
-    </div>
+  const {
+    data: { results },
+  } = response as AxiosResponse<MlbbResponse>;
+
+  const avgPreco = (arr: number[]): number =>
+    arr.reduce((a, b) => a + b, 0) / arr.length;
+
+  const prices: number = avgPreco(results.map((v) => v.price));
+  const attributes: { at_name: string; at_value: string }[] = [];
+
+  results.forEach((v) =>
+    v.attributes.forEach((at) => {
+      if (!attributes.find((p) => p.at_name == at.name)) {
+        attributes.push({
+          at_name: at.name,
+          at_value: at.value_name,
+        });
+      }
+    })
   );
+
+  return {
+    avg_price: Math.round(prices),
+    attributes,
+  };
 }
-
-export default App;
-
-// Interfaces já definidas e retorno +- feito, falta fazer outra verificação para ver se o produto é realmente o que está informado na query de pesquisa.
-// Uma solução é fazer um loop em todos os produtos que o mercado libre retorna e verificar se o nome é o mesmo ou semelhante ao que está na query de pesquisa.
-// Se for, adicionar o preço produto ao array de produtos que foram encontrados.
-// funcão para pegar a média seria:
-
-// interface Produto {
-//   id: string;
-//   price: number;
-// }
-// const produtosEncontrados: Produto[] = [];
-// const media =
-//   produtosEncontrados.reduce((acc, current) => acc + current.price, 0) /
-//   produtosEncontrados.length;

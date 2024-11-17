@@ -159,7 +159,8 @@ async function GetProductData(
   // const search_type = "&searchType=image";
   const responses = "10";
 
-  const url = `https://www.googleapis.com/customsearch/v1?key=${google_key}&cx=${custom_search}&num=${responses}&q=ean+${search}`;
+  const url = `https://www.googleapis.com/customsearch/v1?key=${google_key}&cx=${custom_search}&num=${responses}&q=${search}`;
+  console.log(url)
 
   const response = await axios
     .get<GoogleAPIResponse>(url)

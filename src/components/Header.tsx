@@ -3,8 +3,8 @@ import Logo from "./Logo";
 const Header = () => {
   return (
     <>
-      <header className="w-full h-28 shadow-md fixed top-0 right-0 z-50 bg-transparent">
-        <div className="container h-full mx-auto flex justify-between items-center">
+      <header className="w-full h-28 shadow-md fixed top-0 right-0 z-50 bg-gray-50">
+        <div className="container h-full mx-auto flex justify-between items-center px-4">
           <div className="flex items-center gap-6">
             <Logo />
             <h1 className="text-brand2 text-3xl">

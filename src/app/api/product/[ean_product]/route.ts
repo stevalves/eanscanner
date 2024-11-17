@@ -2,7 +2,7 @@
 
 import { AxiosResponse } from "axios";
 import { GetProductData, GoogleAPIResponse } from "./google";
-import { ensureProductIsValid, generateJSON } from "./groq";
+import { generateJSON } from "./groq";
 import { NextRequest, NextResponse } from "next/server";
 import { getAttributesAndAvPrice } from "./mlbb";
 
@@ -15,17 +15,39 @@ async function getJSON(ean: string): Promise<Object> {
   if (!productData || !productData.items)
     return { response: "error", message: "product not found!" };
 
-  const productImageList = productData.items
-    .map((i) => i.pagemap.metatags[0]["og:image"])
-    .filter((i) => i);
+  let productImageList: string[] = [];
+  let productName: string = "";
 
-  const productName = productData.items.find(
-    (v) => v.pagemap.metatags[0]["og:title"]
-  )!.pagemap.metatags[0]["og:title"];
+  productData.items.forEach((i) => {
+    // Try to get some image from product
+    if (i.pagemap.metatags[0]["og:image"]) {
+      productImageList.push(i.pagemap.metatags[0]["og:image"]);
+    }
 
-  if (!(await ensureProductIsValid(productName!))) {
-    return { response: "error", message: "product is not valid!" };
-  }
+    if (
+      i.pagemap.cse_image &&
+      i.pagemap.cse_image[0].src &&
+      !productImageList.length
+    ) {
+      productImageList.push(i.pagemap.cse_image[0].src);
+    }
+    if (
+      i.pagemap.cse_thumbnail &&
+      i.pagemap.cse_thumbnail[0].src &&
+      !productImageList.length
+    ) {
+      productImageList.push(i.pagemap.cse_image[0].src);
+    }
+
+    // Try to get title from metatags
+    if (i.pagemap.metatags[0]["og:title"]) {
+      productName = i.pagemap.metatags[0]["og:title"];
+    }
+
+    if (!productName) {
+      productName = i.title;
+    }
+  });
 
   const getProductCategoryAndDescription = await generateJSON(productName!);
 

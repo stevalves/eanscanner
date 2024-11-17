@@ -1,7 +1,8 @@
-import { Header, Logo } from "@/components";
+import { Header } from "@/components";
 import EanForm from "@/components/EanForm";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { Advantages } from "@/components/sections/Advantages";
+import { EanTypes } from "@/components/sections/EanTypes";
+import Image from "next/image";
 
 // Verifica se o parâmetro ?json=true está presente
 // if (json === "true") {
@@ -86,9 +87,9 @@ export default function Home({ searchParams }: { searchParams: any }) {
   return (
     <>
       <Header />
-      <div className="relative w-full h-screen justify-center items-center hidden lg:flex">
-        <div className="absolute bottom-10 left-10 w-1/4 h-1/6 border-l-2 border-l-brand2 border-b-4 border-b-brand3" />
-        <div className="absolute top-36 right-10 w-1/6 h-1/4 border-r-2 border-r-brand2 border-t-4 border-t-brand3" />
+      <div className="relative w-full h-screen justify-center items-center flex">
+        <div className="absolute bottom-10 left-10 w-1/4 h-1/6 border-l-2 border-l-brand2 border-b-4 border-b-brand3 hidden lg:flex" />
+        <div className="absolute top-36 right-10 w-1/6 h-1/4 border-r-2 border-r-brand2 border-t-4 border-t-brand3 hidden lg:flex" />
         <div className="container mx-auto flex justify-center items-center flex-col gap-12">
           <div className="flex flex-col gap-2 justify-center items-center">
             <h4 className="text-3xl text-brand2">Leitor de Código de Barras</h4>
@@ -100,6 +101,9 @@ export default function Home({ searchParams }: { searchParams: any }) {
           <EanForm />
         </div>
       </div>
+      <Advantages />
+      <EanTypes />
+      <div className="w-full h-4 bg-brand2" />
     </>
   );
 }

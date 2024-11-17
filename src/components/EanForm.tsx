@@ -38,10 +38,10 @@ export default function EanForm() {
     >
       <CiBarcode className="text-6xl text-brand2" />
       <div className="flex flex-col items-center">
-        <h4 className="text-2xl text-brand2">
+        <h4 className="text-2xl text-brand2 text-center">
           No campo abaixo, insira o código de barras do produto:
         </h4>
-        <p className="text-gray-600">
+        <p className="text-gray-600 text-center">
           Esta aplicação tem suporte a vários tipos de código de barras
         </p>
       </div>

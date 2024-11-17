@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Logo from "./Logo";
 
-export function Footer() {
+export default function Footer() {
   return (
     <footer className="w-full h-28 bg-brand4 flex items-center">
       <div className="container mx-auto flex justify-between items-center text-gray-200  px-4">

@@ -34,7 +34,7 @@ interface iNavList {
   setOpen: (value: React.SetStateAction<boolean>) => void;
 }
 
-const NavList = ({ open, setOpen }: iNavList) => {
+export default function NavList({ open, setOpen }: iNavList) {
   const list_tv = tv({
     base: "fixed sm:py-4 overflow-hidden flex flex-col transition-all sm:static sm:h-max text-3xl sm:text-2xl justify-between py-24 sm:gap-5 w-0 sm:bg-transparent sm:flex-row sm:w-max sm:visible overflow-x-hidden bg-brand1/90 invisible top-0 h-screen right-0 duration-1",
     variants: {
@@ -66,6 +66,4 @@ const NavList = ({ open, setOpen }: iNavList) => {
       ))}
     </ul>
   );
-};
-
-export default NavList;
+}

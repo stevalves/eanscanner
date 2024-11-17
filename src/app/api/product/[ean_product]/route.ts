@@ -1,5 +1,3 @@
-// Aqui será feita a junção das funções para enfim retornar um JSON pronto para a aplicação.
-
 import { AxiosResponse } from "axios";
 import { GetProductData, GoogleAPIResponse } from "./google";
 import { generateJSON } from "./groq";
@@ -20,20 +18,15 @@ export interface iGetJSON {
   category: string;
 }
 
-export async function getJSON(ean: string): Promise<iGetJSON> {
+async function getJSON(ean: string): Promise<iGetJSON> {
   let { data: productData } = (await GetProductData(
     ean
   )) as AxiosResponse<GoogleAPIResponse>;
-
-  // Ensure exists data
-  // if (!productData || !productData.items)
-  //   return { response: "error", message: "product not found!" };
 
   let productImageList: string[] = [];
   let productName: string = "";
 
   productData.items.forEach((i) => {
-    // Try to get some image from product
     if (
       i.pagemap.metatags[0]["og:image"] &&
       /https:\/\/.*/.test(i.pagemap.metatags[0]["og:image"])
@@ -57,8 +50,7 @@ export async function getJSON(ean: string): Promise<iGetJSON> {
     ) {
       productImageList.push(i.pagemap.cse_image[0].src);
     }
-
-    // Try to get title from metatags
+    
     if (i.pagemap.metatags[0]["og:title"]) {
       productName = i.pagemap.metatags[0]["og:title"];
     }

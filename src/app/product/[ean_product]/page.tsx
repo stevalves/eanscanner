@@ -4,7 +4,7 @@ import { iGetJSON } from "@/app/api/product/[ean_product]/route";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios, { AxiosResponse } from "axios";
-import { Loading } from "@/components/Loading";
+import Loading from "@/components/Loading";
 import Image from "next/image";
 import Link from "next/link";
 import { IoIosReturnLeft } from "react-icons/io";

@@ -153,10 +153,8 @@ interface Url {
 async function GetProductData(
   search: string
 ): Promise<GoogleAPIResponse | void | any> {
-  // Important Queries
   const google_key = process.env.GOOGLE_USER_KEY;
   const custom_search = process.env.CUSTOM_SEARCH_KEY;
-  // const search_type = "&searchType=image";
   const responses = "10";
 
   const url = `https://www.googleapis.com/customsearch/v1?key=${google_key}&cx=${custom_search}&num=${responses}&q=${search}`;

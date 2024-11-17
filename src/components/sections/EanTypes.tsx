@@ -68,7 +68,7 @@ const eanTypeList = [
   },
 ];
 
-export function EanTypes() {
+export default function EanTypes() {
   return (
     <>
       <div className="flex flex-col gap-2 items-center justify-center my-12">
@@ -105,8 +105,10 @@ export function EanTypes() {
                     </h5>
                   </div>
                   <div className="flex flex-col gap-2">
-                    {ean.use_to.map((i) => (
-                      <h5 className="text-md text-brand3/80">| {i}</h5>
+                    {ean.use_to.map((v, i) => (
+                      <h5 key={`${v}${i}`} className="text-md text-brand3/80">
+                        | {i}
+                      </h5>
                     ))}
                   </div>
                 </div>

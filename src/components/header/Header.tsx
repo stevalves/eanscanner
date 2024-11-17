@@ -2,7 +2,7 @@ import Logo from "../Logo";
 import Link from "next/link";
 import NavBar from "./NavBar";
 
-const Header = () => {
+export default function Header() {
   return (
     <>
       <header className="w-full h-20 md:h-28 shadow-md fixed top-0 right-0 z-50 bg-gray-50">
@@ -19,6 +19,4 @@ const Header = () => {
       </header>
     </>
   );
-};
-
-export { Header };
+}

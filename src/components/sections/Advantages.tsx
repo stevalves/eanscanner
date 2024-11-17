@@ -2,7 +2,7 @@ import { AiOutlineThunderbolt } from "react-icons/ai";
 import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
 import { MdOutlinePayments } from "react-icons/md";
 
-export function Advantages() {
+export default function Advantages() {
   return (
     <section
       id="advantages"

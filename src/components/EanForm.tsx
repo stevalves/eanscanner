@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { CiBarcode, CiSearch } from "react-icons/ci";
-import { Loading } from "./Loading";
+import Loading from "./Loading";
 
 export default function EanForm() {
   const [error, setError] = useState<boolean>(false);
@@ -19,12 +19,12 @@ export default function EanForm() {
     } = form.elements as typeof form.elements & {
       eanInput: { value: string };
     };
-    if (/^\d+$/.test(value)){
-      setError(false)
+    if (/^\d+$/.test(value)) {
+      setError(false);
     } else {
-      setError(true)
-      setIsLoading(false)
-      return
+      setError(true);
+      setIsLoading(false);
+      return;
     }
 
     return !value

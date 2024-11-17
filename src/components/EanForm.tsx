@@ -34,7 +34,7 @@ export default function EanForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-1/2 border border-dashed border-brand3 z-10 py-6 px-12 rounded flex flex-col gap-4 items-center"
+      className="md:w-1/2 mx-12 md:mx-0 w-full border border-dashed border-brand3 z-10 py-6 px-12 rounded flex flex-col gap-4 items-center"
     >
       <CiBarcode className="text-6xl text-brand2" />
       <div className="flex flex-col items-center">

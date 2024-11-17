@@ -67,8 +67,8 @@ export default function Page() {
   if (data) {
     return (
       <main className="mt-32 container mx-auto">
-        <div className="w-full py-4 flex items-center justify-between">
-          <div className="flex gap-4 items-center">
+        <div className="w-full py-4 flex md:flex-row flex-col items-center justify-between">
+          <div className="flex gap-4 items-center w-full md:w-fit justify-between md:justify-normal px-4 md:px-0">
             <Link href="/" className="text-3xl font-medium text-brand3">
               <IoIosReturnLeft />
             </Link>
@@ -76,7 +76,7 @@ export default function Page() {
               Informações do produto
             </h3>
           </div>
-          <div className="flex gap-4">
+          <div className="flex gap-4 justify-end w-full px-4 md:px-0 md:justify-normal md:w-fit">
             <Link
               href={`/api/product/${ean_product}`}
               className="text-brand3 text-xl hover:text-brand4 hover:underline transition-all duration-300"
@@ -91,8 +91,11 @@ export default function Page() {
             </button>
           </div>
         </div>
-        <div className="flex w-full bg-slate-200 py-14 px-8 rounded-lg">
-          <div className="w-1/2 flex flex-col gap-2 pr-4" id="product-info">
+        <div className="flex flex-col md:flex-row w-full bg-slate-200 py-14 px-8 rounded-lg">
+          <div
+            className="w-full md:w-1/2 flex flex-col gap-2 pr-4"
+            id="product-info"
+          >
             <h2 className="text-3xl font-light text-brand2">{data.name}</h2>
             <h6 className="text-xl font-medium text-brand4">{data.category}</h6>
             <h6 className="text-xl font-medium text-brand4">
@@ -118,7 +121,7 @@ export default function Page() {
               ))}
             </div>
           </div>
-          <div className="w-1/2">
+          <div className="w-full md:w-1/2 mt-4 md:mt-0">
             <div className="w-full h-80 bg-brand1/40 rounded-lg overflow-hidden">
               <Image
                 width="0"
@@ -132,42 +135,45 @@ export default function Page() {
           </div>
         </div>
         <div className="my-12">
-          <h3 className="text-3xl w-full text-center font-medium text-brand3 py-4">
-            Tabela de atributos
-          </h3>
-          <div className="flex flex-col">
-            <div className="overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                <div className="overflow-hidden">
-                  <table className="min-w-full text-left text-2xl font-light text-surface text-brand3">
-                    <thead className="border-b border-brand1 font-normal dark:border-brand3/10">
-                      <tr>
-                        <th scope="col" className="px-6 py-4">
-                          Nome
-                        </th>
-                        <th scope="col" className="px-6 py-4">
-                          Valor
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {data.attributes?.map((v) => {
-                        return (
-                          <tr className="border-b border-neutral-200 dark:border-brand3/10">
-                            <td className="whitespace-nowrap px-6 py-4 font-medium">
-                              {v.at_name}
-                            </td>
-                            <td className="whitespace-nowrap px-6 py-4">
-                              {v.at_value}
-                            </td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+          <div className="overflow-x-auto">
+            <table className="min-w-full border-collapse border border-brand1">
+              <caption className="text-3xl w-full text-center font-medium text-brand3 py-4">
+                Tabela de atributos
+              </caption>
+              <thead className="hidden sm:table-header-group">
+                <tr className="bg-gray-100 border border-brand1">
+                  <th className="px-4 py-2 text-lg font-normal text-brand3 uppercase">
+                    Atributo
+                  </th>
+                  <th className="px-4 py-2 text-lg font-normal text-brand2 uppercase">
+                    Valor
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.attributes?.map((value, index) => (
+                  <tr
+                    key={`${value.at_name}${index}`}
+                    className="bg-white even:bg-brand1/20 sm:border sm:border-brand1 sm:table-row flex flex-col mb-4 sm:mb-0"
+                  >
+                    <td
+                      data-label="Atributo"
+                      className="px-4 py-2 text-sm font-medium text-gray-800 sm:border sm:border-brand1 sm:table-cell flex justify-between sm:justify-center"
+                    >
+                      <span className="sm:hidden font-bold">Atributo:</span>
+                      {value.at_name}
+                    </td>
+                    <td
+                      data-label="Valor"
+                      className="px-4 py-2 text-sm text-gray-800 sm:border sm:border-brand1 sm:table-cell flex justify-between sm:justify-center"
+                    >
+                      <span className="sm:hidden font-bold">Valor:</span>
+                      {value.at_value}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </main>

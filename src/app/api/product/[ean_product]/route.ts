@@ -6,14 +6,28 @@ import { generateJSON } from "./groq";
 import { NextRequest, NextResponse } from "next/server";
 import { getAttributesAndAvPrice } from "./mlbb";
 
-async function getJSON(ean: string): Promise<Object> {
+export interface iGetJSON {
+  images: string[];
+  avg_price?: number | undefined;
+  attributes?:
+    | {
+        at_name: string;
+        at_value: string;
+      }[]
+    | undefined;
+  name: string;
+  description: string;
+  category: string;
+}
+
+export async function getJSON(ean: string): Promise<iGetJSON> {
   let { data: productData } = (await GetProductData(
     ean
   )) as AxiosResponse<GoogleAPIResponse>;
 
   // Ensure exists data
-  if (!productData || !productData.items)
-    return { response: "error", message: "product not found!" };
+  // if (!productData || !productData.items)
+  //   return { response: "error", message: "product not found!" };
 
   let productImageList: string[] = [];
   let productName: string = "";

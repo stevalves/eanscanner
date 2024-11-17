@@ -1,6 +1,9 @@
 import Groq from "groq-sdk";
 
-const client: Groq = new Groq();
+const client: Groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY,
+  dangerouslyAllowBrowser: true,
+});
 
 export async function generateJSON(
   name: string

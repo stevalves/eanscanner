@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { Anek_Latin } from "next/font/google";
 import "./globals.css";
+import { Header } from "@/components";
 
-const inter = Anek_Latin({ subsets: ["latin"] });
+const font = Anek_Latin({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "EANScanner",
@@ -16,7 +17,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={font.className}>
+        <Header />
+        {children}
+        </body>
     </html>
   );
 }

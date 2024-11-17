@@ -34,21 +34,26 @@ export async function getJSON(ean: string): Promise<iGetJSON> {
 
   productData.items.forEach((i) => {
     // Try to get some image from product
-    if (i.pagemap.metatags[0]["og:image"]) {
+    if (
+      i.pagemap.metatags[0]["og:image"] &&
+      /https:\/\/.*/.test(i.pagemap.metatags[0]["og:image"])
+    ) {
       productImageList.push(i.pagemap.metatags[0]["og:image"]);
     }
 
     if (
       i.pagemap.cse_image &&
       i.pagemap.cse_image[0].src &&
-      !productImageList.length
+      !productImageList.length &&
+      /https:\/\/.*/.test(i.pagemap.cse_image[0].src)
     ) {
       productImageList.push(i.pagemap.cse_image[0].src);
     }
     if (
       i.pagemap.cse_thumbnail &&
       i.pagemap.cse_thumbnail[0].src &&
-      !productImageList.length
+      !productImageList.length &&
+      /https:\/\/.*/.test(i.pagemap.cse_image[0].src)
     ) {
       productImageList.push(i.pagemap.cse_image[0].src);
     }

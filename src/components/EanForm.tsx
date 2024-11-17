@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CiBarcode, CiSearch } from "react-icons/ci";
 import { Loading } from "./Loading";
 
@@ -29,7 +29,7 @@ export default function EanForm() {
 
     return !value
       ? console.log("Nada aqui.")
-      : router.push(`api/product/${value}}`);
+      : router.push(`product/${value}}`);
   }
   return (
     <form

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Anek_Latin } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components";
+import { Footer } from "@/components/Footer";
 
 const font = Anek_Latin({ subsets: ["latin"] });
 
@@ -20,7 +21,8 @@ export default function RootLayout({
       <body className={font.className}>
         <Header />
         {children}
-        </body>
+        <Footer />
+      </body>
     </html>
   );
 }

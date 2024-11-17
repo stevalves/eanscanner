@@ -1,5 +1,6 @@
 import { Header } from "@/components";
 import EanForm from "@/components/EanForm";
+import { Footer } from "@/components/Footer";
 import { Advantages } from "@/components/sections/Advantages";
 import { EanTypes } from "@/components/sections/EanTypes";
 import Image from "next/image";

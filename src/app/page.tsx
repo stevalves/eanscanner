@@ -95,7 +95,20 @@ export default function Home({ searchParams }: { searchParams: any }) {
       </div>
       <Advantages />
       <EanTypes />
-      <div className="w-full h-4 bg-brand2" />
+      <section className="w-full py-8 px-2 bg-brand3">
+        <div className="container mx-auto">
+          <div className="flex flex-col gap-2 px-2">
+            <h3 className="text-gray-100 font-medium text-3xl text-center">
+              Nossos Planos
+            </h3>
+            <p className="font-light text-gray-300 text-xl text-center">
+              Aqui também oferecemos planos que vão auxiliar empresas a
+              implementar essa ferramenta no dia-a-dia e que abraça todos os
+              setores independente da sua escala.
+            </p>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

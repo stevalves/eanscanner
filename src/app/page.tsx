@@ -1,9 +1,10 @@
 import EanForm from "@/components/EanForm";
 import Advantages from "@/components/sections/Advantages";
 import EanTypes from "@/components/sections/EanTypes";
+import Plans from "@/components/sections/Plans";
+import Testimonial from "@/components/sections/Testimonial";
 
 export default function Home() {
-
   interface iProduct {
     name: string;
     description: string;
@@ -15,63 +16,6 @@ export default function Home() {
     }[];
     images: string[];
   }
-  const productExample: iProduct = {
-    name: "Macarrão Instantâneo Lámen Carne Nissin Miojo",
-    description:
-      "Macarrão instantâneo sabor carne, fácil de preparar e delicioso. Pacote de 85g.",
-    category: "Massa",
-    avg_price: 9,
-    attributes: [
-      {
-        at_name: "Marca",
-        at_value: "Nissin",
-      },
-      {
-        at_name: "Código universal de produto",
-        at_value: "7891079001004",
-      },
-      {
-        at_name: "Condição do item",
-        at_value: "Novo",
-      },
-      {
-        at_name: "Modelo",
-        at_value: "85g",
-      },
-      {
-        at_name: "Comprimento da embalagem",
-        at_value: "12.2 cm",
-      },
-      {
-        at_name: "Peso da embalagem",
-        at_value: "90 g",
-      },
-      {
-        at_name: "Conservação do produto",
-        at_value: "Temperatura ambiente",
-      },
-      {
-        at_name: "Formato de venda",
-        at_value: "Unidade",
-      },
-      {
-        at_name: "Unidades por kit",
-        at_value: "1",
-      },
-      {
-        at_name: "Peso da unidade",
-        at_value: "85 g",
-      },
-      {
-        at_name: "Peso líquido",
-        at_value: "85 g",
-      },
-    ],
-    images: [
-      "https://cdn-cosmos.bluesoft.com.br/products/7891079000205",
-      "https://static.openfoodfacts.org/images/logos/off-logo-vertical-white-social-media-preview.png",
-    ],
-  };
 
   return (
     <>
@@ -91,20 +35,8 @@ export default function Home() {
       </div>
       <Advantages />
       <EanTypes />
-      <section className="w-full py-8 px-2 bg-brand3">
-        <div className="container mx-auto">
-          <div className="flex flex-col gap-2 px-2">
-            <h3 className="text-gray-100 font-medium text-3xl text-center">
-              Nossos Planos
-            </h3>
-            <p className="font-light text-gray-300 text-xl text-center">
-              Aqui também oferecemos planos que vão auxiliar empresas a
-              implementar essa ferramenta no dia-a-dia e que abraça todos os
-              setores independente da sua escala.
-            </p>
-          </div>
-        </div>
-      </section>
+      <Plans />
+      <Testimonial />
     </>
   );
 }

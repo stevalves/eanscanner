@@ -12,7 +12,7 @@ export default function Testimonial() {
             <SiComma />
           </div>
           <p className="my-2 text-lg text-gray-800 text-center w-2/3">
-            "O ScanEasy é incrível! Ele facilita muito minha rotina ao buscar
+            "O eanscanner é incrível! Ele facilita muito minha rotina ao buscar
             informações sobre produtos de forma rápida e gratuita. Recomendo
             para todos que precisam de uma solução prática e confiável!"
           </p>

@@ -1,4 +1,5 @@
 import EanForm from "@/components/EanForm";
+import AboutUs from "@/components/sections/AboutUs";
 import Advantages from "@/components/sections/Advantages";
 import EanTypes from "@/components/sections/EanTypes";
 import Plans from "@/components/sections/Plans";
@@ -37,6 +38,7 @@ export default function Home() {
       <EanTypes />
       <Plans />
       <Testimonial />
+      <AboutUs />
     </>
   );
 }

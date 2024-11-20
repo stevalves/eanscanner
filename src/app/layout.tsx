@@ -8,7 +8,8 @@ const font = Anek_Latin({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "EANScanner",
-  description: "desc",
+  description:
+    "Uma aplicação que permite a busca de informações detalhadas de um produto a partir do seu código de barras.",
 };
 
 export default function RootLayout({

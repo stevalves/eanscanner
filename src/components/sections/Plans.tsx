@@ -3,7 +3,7 @@ import { FcOk } from "react-icons/fc";
 
 export default function Plans() {
   return (
-    <section className="w-full py-8 px-2 bg-brand3">
+    <section className="w-full py-8 px-2 bg-brand3" id="plans">
       <div className="container mx-auto">
         <div className="flex flex-col gap-2 px-2">
           <h3 className="text-gray-100 font-medium text-3xl text-center">

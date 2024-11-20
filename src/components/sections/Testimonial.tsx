@@ -4,7 +4,7 @@ import { SiComma } from "react-icons/si";
 
 export default function Testimonial() {
   return (
-    <section className="py-4">
+    <section className="py-4" id="testimonial">
       <div className="container mx-auto flex justify-center">
         <div className="w-3/4 my-12 rounded-lg flex flex-col items-center px-2 gap-2">
           <div className="flex text-brand4">

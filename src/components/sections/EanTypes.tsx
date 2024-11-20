@@ -71,7 +71,7 @@ const eanTypeList = [
 export default function EanTypes() {
   return (
     <>
-      <div className="flex flex-col gap-2 items-center justify-center my-12">
+      <div className="flex flex-col gap-2 items-center justify-center my-12" id="eanTypes">
         <h3 className="text-brand3 font-medium text-3xl text-center">
           Tipos de código de barras
         </h3>

@@ -2,6 +2,8 @@ import EanForm from "@/components/EanForm";
 import AboutUs from "@/components/sections/AboutUs";
 import Advantages from "@/components/sections/Advantages";
 import EanTypes from "@/components/sections/EanTypes";
+import GoogleMaps from "@/components/sections/GoogleMaps";
+import Newsletter from "@/components/sections/Newsletter";
 import Plans from "@/components/sections/Plans";
 import Testimonial from "@/components/sections/Testimonial";
 
@@ -20,7 +22,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="relative w-full h-screen justify-center items-center flex">
+      <div className="relative w-full h-screen justify-center items-center flex" id="reader">
         <div className="absolute bottom-10 left-10 w-1/4 h-1/6 border-l-2 border-l-brand2 border-b-4 border-b-brand3 hidden lg:flex" />
         <div className="absolute top-36 right-10 w-1/6 h-1/4 border-r-2 border-r-brand2 border-t-4 border-t-brand3 hidden lg:flex" />
         <div className="container mx-4 flex justify-center items-center flex-col gap-12">
@@ -39,6 +41,8 @@ export default function Home() {
       <Plans />
       <Testimonial />
       <AboutUs />
+      <GoogleMaps />
+      <Newsletter />
     </>
   );
 }

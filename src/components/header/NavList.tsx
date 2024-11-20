@@ -8,24 +8,29 @@ interface iNavValues {
 
 const navValues: iNavValues[] = [
   {
-    id: "ReaderId1",
+    id: "lerid",
     title: "Leitor",
     href: "#reader",
   },
   {
-    id: "TypesId2",
+    id: "tiposid",
     title: "Tipos",
-    href: "#types",
+    href: "#eanTypes",
   },
   {
-    id: "PlansId3",
+    id: "planosid",
     title: "Planos",
     href: "#plans",
   },
   {
-    id: "UsId4",
+    id: "sobreid",
     title: "Sobre Nós",
-    href: "#us",
+    href: "#aboutUs",
+  },
+  {
+    id: "mapaid",
+    title: "Mapa",
+    href: "#map",
   },
 ];
 

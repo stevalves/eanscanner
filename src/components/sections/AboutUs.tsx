@@ -4,8 +4,8 @@ import { FaMoneyBillTrendUp } from "react-icons/fa6";
 
 export default function AboutUs() {
   return (
-    <div className="py-20">
-      <div className="container mx-auto border-t-2 border-brand2 py-20">
+    <div className="pb-20">
+      <div className="container mx-auto border-t-2 border-brand2 py-10">
         <div className="flex flex-wrap flex-col gap-8 md:gap-0 md:flex-row md:justify-between">
           {/* About Us Section */}
           <div className="w-full md:w-1/2 px-4">

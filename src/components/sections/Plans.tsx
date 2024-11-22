@@ -1,5 +1,6 @@
 import { FaStar } from "react-icons/fa";
 import { FcOk } from "react-icons/fc";
+import { IoIosInformationCircleOutline } from "react-icons/io";
 
 export default function Plans() {
   return (
@@ -20,14 +21,14 @@ export default function Plans() {
         <div className="grid grid-cols-6 p-4 w-full max-w-7xl gap-3 gap-y-5">
           <div className="w-full col-span-full sm:col-span-3 lg:col-span-2 flex flex-col justify-end lg:h-full h-fit">
             <div className="flex flex-col p-6 text-center text-gray-800 bg-white rounded-lg border border-gray-300 shadow-lg xl:p-8">
-              <h3 className="mb-4 text-2xl font-semibold">Básico</h3>
+              <h3 className="mb-4 text-2xl font-semibold">Trial</h3>
               <p className="font-light text-gray-500 sm:text-lg">
                 Usuários casuais ou pequenos negócios que precisam consultar
                 produtos ocasionalmente.
               </p>
               <div className="flex justify-center items-baseline my-8">
                 <span className="mr-2 text-5xl font-extrabold text-brand4">
-                  $9
+                  $0.00
                 </span>
                 <span className="text-gray-500">/mês</span>
               </div>
@@ -90,11 +91,17 @@ export default function Plans() {
                 Pequenos empreendedores e desenvolvedores que precisam de mais
                 dados e maior capacidade de uso.
               </p>
-              <div className="flex justify-center items-baseline my-8">
-                <span className="mr-2 text-5xl font-extrabold text-brand4">
-                  $14
+              <div className="flex flex-col my-8">
+                <div className="flex justify-center items-baseline">
+                  <span className="mr-2 text-5xl font-extrabold text-brand4">
+                    $9.99
+                  </span>
+                  <span className="text-gray-500">/Mês</span>
+                </div>
+                <span className="font-light text-sm px-12">
+                  Adicional de $2 a cada 100 requisições que ultrapassarem o
+                  limite
                 </span>
-                <span className="text-gray-500">/Mês</span>
               </div>
               <ul role="list" className="mb-8 space-y-4 text-left">
                 <li className="flex items-center space-x-3">
@@ -149,11 +156,16 @@ export default function Plans() {
                 Grandes empresas, marketplaces ou startups que integram busca de
                 produtos em tempo real como parte de sua aplicação principal.
               </p>
-              <div className="flex justify-center items-baseline my-8">
-                <span className="mr-2 text-5xl font-extrabold text-brand4">
-                  $19
+              <div className="flex flex-col my-8">
+                <div className="flex justify-center items-baseline">
+                  <span className="mr-2 text-5xl font-extrabold text-brand4">
+                    $14.99
+                  </span>
+                  <span className="text-gray-500">/Mês</span>
+                </div>
+                <span className="font-light text-sm px-12">
+                  Adicional de $3 a cada 1000 requisições
                 </span>
-                <span className="text-gray-500">/Mês</span>
               </div>
               <ul role="list" className="mb-8 space-y-4 text-left">
                 <li className="flex items-center space-x-3">
